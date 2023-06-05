@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class ListViewModel @Inject constructor(
     private val getListItems: GetListItems
@@ -19,13 +20,10 @@ class ListViewModel @Inject constructor(
     private val _state = mutableStateOf(ListState())
     val state: State<ListState> = _state
 
-
-
     init {
         viewModelScope.launch {
             getListItems()
         }
-
     }
     private suspend fun getListItems() {
         getListItems.invoke().onEach { result ->

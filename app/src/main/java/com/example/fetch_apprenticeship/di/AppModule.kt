@@ -8,6 +8,7 @@ import com.example.fetch_apprenticeship.data.remote.api.FetchApi
 import com.example.fetch_apprenticeship.data.repository.ListItemRepository
 import com.example.fetch_apprenticeship.data.repository.ListItemRepositoryImpl
 import com.example.fetch_apprenticeship.domain.use_case.GetListItems
+import com.example.fetch_apprenticeship.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +25,7 @@ object AppModule {
     @Singleton
     fun provideFetchApi(): FetchApi {
         return Retrofit.Builder()
-            .baseUrl(FetchApi.BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(FetchApi::class.java)
@@ -56,6 +57,4 @@ object AppModule {
     fun provideListDao(db: ListDatabase): ListDao {
         return db.listDao()
     }
-
-
 }

@@ -7,6 +7,10 @@ import kotlinx.coroutines.flow.Flow
 
 import javax.inject.Inject
 
+/**
+ * Use case for [GetListItems]
+ * used to fetch the list items from the database
+ */
 class GetListItems @Inject constructor(
     private val repository: ListItemRepository
 ) {

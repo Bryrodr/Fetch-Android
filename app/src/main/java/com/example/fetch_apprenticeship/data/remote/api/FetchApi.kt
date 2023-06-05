@@ -1,13 +1,13 @@
 package com.example.fetch_apprenticeship.data.remote.api
 
-import com.example.fetch_apprenticeship.data.local.entity.ListItemEntity
+import com.example.fetch_apprenticeship.data.remote.dto.ListItemDto
 import retrofit2.http.GET
 
+/**
+ * Retrofit API interface for the Fetch API
+ * */
 interface FetchApi {
     @GET("hiring.json")
-    suspend fun getItems(): List<ListItemEntity>
+    suspend fun getItems(): List<ListItemDto>
 
-    companion object{
-        const val BASE_URL = "https://fetch-hiring.s3.amazonaws.com/"
-    }
 }
