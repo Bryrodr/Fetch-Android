@@ -17,7 +17,7 @@ interface ListDao {
             "FROM list l " +
             "WHERE l.name IS NOT NULL AND l.name <> '' " +
             "ORDER BY l.listId ASC, l.name;")
-    suspend fun getListItems(): List<ListItemEntity>
+    suspend fun getLocalListItems(): List<ListItemEntity>
 
 
 }

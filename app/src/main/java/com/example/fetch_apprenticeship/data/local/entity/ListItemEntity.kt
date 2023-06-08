@@ -15,8 +15,6 @@ data class ListItemEntity(
     val name: String?,
 )
 
-
-
 fun ListItemEntity.toListItem() = com.example.fetch_apprenticeship.domain.model.ListItem(
     id = id,
     listId = listId,

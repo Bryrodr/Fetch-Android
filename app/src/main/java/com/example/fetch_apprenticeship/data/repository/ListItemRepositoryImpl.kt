@@ -23,11 +23,12 @@ class ListItemRepositoryImpl @Inject constructor(
 ): ListItemRepository {
     override suspend fun getItems(): Flow<Result<List<ListItem>>> = flow {
         emit(Result.Loading())
-        val listItems = dao.getListItems().map { it.toListItem()}
+        val listItems = dao.getLocalListItems().map { it.toListItem()}
         emit(Result.Loading(data = listItems))
 
+        //fetching data from api
         try{
-            val remoteListItems = listApi.getItems().map { it.toListItemEntity()}
+            val remoteListItems = listApi.getRemoteItems().body()!!.map { it.toListItemEntity() }
             dao.insertAllItems(remoteListItems)
         } catch(e: HttpException){
             emit(Result.Error("An unexpected error occurred", data = listItems))
@@ -36,7 +37,7 @@ class ListItemRepositoryImpl @Inject constructor(
             emit(Result.Error("Check your internet connection.", data = listItems))
         }
 
-        val localListItems = dao.getListItems().map { it.toListItem() }
+        val localListItems = dao.getLocalListItems().map { it.toListItem() }
         emit(Result.Success(localListItems))
     }
 
